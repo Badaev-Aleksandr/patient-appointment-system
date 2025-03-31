@@ -1,6 +1,6 @@
 package de.ait.patientappointmentsystem.model;
 
-import de.ait.patientappointmentsystem.model.enums.Role;
+import de.ait.patientappointmentsystem.enums.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
