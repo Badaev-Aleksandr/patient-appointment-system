@@ -1,5 +1,6 @@
 package de.ait.patientappointmentsystem.configurations;
 
+import com.github.javafaker.Faker;
 import de.ait.patientappointmentsystem.model.Appointment;
 import de.ait.patientappointmentsystem.model.Patient;
 import de.ait.patientappointmentsystem.model.User;
@@ -18,18 +19,14 @@ import java.util.List;
 @Component
 public class UserDataInitializer {
 
+    Faker faker = new Faker();
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final PatientRepository patientRepository;
-    private final AppointmentRepository appointmentRepository;
 
-
-    public UserDataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                               PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
+    public UserDataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.patientRepository = patientRepository;
-        this.appointmentRepository = appointmentRepository;
     }
 
     @PostConstruct
@@ -42,43 +39,51 @@ public class UserDataInitializer {
             admin.setPassword(passwordEncoder.encode("admin123"));
             userRepository.save(admin);
         }
-        if (userRepository.findByUsername("user").isEmpty()) {
-            User user1 = new User();
-            User user2 = new User();
-            Patient patient1 = new Patient();
-            Patient patient2 = new Patient();
-            Appointment appointment1 = new Appointment();
-            Appointment appointment2 = new Appointment();
 
-            user1.setUsername("user1");
-            user1.setPassword(passwordEncoder.encode("user123"));
-            user1.getRoles().add(Role.ROLE_USER);
+        if (userRepository.findByUsername("user1").isEmpty()) {
+            User user = new User();
+            Patient patient = new Patient();
+            Appointment appointment = new Appointment();
 
-            appointment1.setPatient(patient1);
-            appointment2.setPatient(patient2);
-            appointment1.setAppointmentDateTime(LocalDateTime.of(2025, 05, 15, 14, 45));
-            appointment2.setAppointmentDateTime(LocalDateTime.of(2025, 06, 22, 10, 45));
-            patient1.setUser(user1);
-            patient1.setEmail("user1@gmail.com");
-            patient1.setFullName("User1");
-            patient1.setDateOfBirth(LocalDate.of(2000, 10, 07));
-            patient1.setPhoneNumber("1234567890");
-            patient1.getAppointments().add(appointment1);
+            patient.setEmail(faker.internet().emailAddress());
+            patient.setFullName(faker.name().fullName());
+            patient.setDateOfBirth(LocalDate.of(2000, 10, 7));
+            patient.setPhoneNumber(faker.phoneNumber().phoneNumber());
 
-            patient2.setPhoneNumber("+41234567890");
-            patient2.setUser(user2);
-            patient2.setEmail("user2@gmail.com");
-            patient2.setFullName("User2");
-            patient2.setDateOfBirth(LocalDate.of(2010, 10, 07));
-            patient2.getAppointments().add(appointment2);
+            user.setUsername("user1");
+            user.setPassword(passwordEncoder.encode("user1123"));
+            user.getRoles().add(Role.ROLE_USER);
+            user.setPatient(patient);
 
-            user2.setUsername("user2");
-            user2.setPassword(passwordEncoder.encode("user123"));
-            user2.getRoles().add(Role.ROLE_USER);
+            appointment.setPatient(patient);
+            appointment.setAppointmentDateTime(LocalDateTime.of(2025, 5, 15, 14, 45));
 
-            userRepository.saveAll(List.of(user1, user2));
-            appointmentRepository.saveAll(List.of(appointment1, appointment2));
-            patientRepository.saveAll(List.of(patient1, patient2));
+            patient.getAppointments().add(appointment);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("user2").isEmpty()) {
+            User user = new User();
+            Patient patient = new Patient();
+            Appointment appointment = new Appointment();
+
+            patient.setEmail(faker.internet().emailAddress());
+            patient.setFullName(faker.name().fullName());
+            patient.setDateOfBirth(LocalDate.of(2010, 10, 17));
+            patient.setPhoneNumber(faker.phoneNumber().phoneNumber());
+
+            user.setUsername("user2");
+            user.setPassword(passwordEncoder.encode("user2123"));
+            user.getRoles().add(Role.ROLE_USER);
+            user.setPatient(patient);
+
+            appointment.setPatient(patient);
+            appointment.setAppointmentDateTime(LocalDateTime.of(2025, 8, 15, 14, 45));
+
+            patient.getAppointments().add(appointment);
+
+            userRepository.save(user);
         }
     }
 }

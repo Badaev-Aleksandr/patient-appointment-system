@@ -1,4 +1,4 @@
-package de.ait.patientappointmentsystem.security;
+package de.ait.patientappointmentsystem.service;
 
 import de.ait.patientappointmentsystem.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,9 +16,18 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
+    public Long getId() {
+        return user.getId();
+    }
+
     public User getUser() {
         return user;
     }
+
+    public Long getPatientId() {
+        return user.getPatient() != null ? user.getPatient().getId() : null;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

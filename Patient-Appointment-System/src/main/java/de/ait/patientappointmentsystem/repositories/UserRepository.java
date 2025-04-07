@@ -1,5 +1,6 @@
 package de.ait.patientappointmentsystem.repositories;
 
+import de.ait.patientappointmentsystem.model.Patient;
 import de.ait.patientappointmentsystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

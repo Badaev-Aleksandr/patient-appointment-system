@@ -1,4 +1,4 @@
-package de.ait.patientappointmentsystem.security;
+package de.ait.patientappointmentsystem.service;
 
 import de.ait.patientappointmentsystem.model.User;
 import de.ait.patientappointmentsystem.repositories.UserRepository;
@@ -20,8 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       return userRepository.findByUsername(username)
-               .map(CustomUserDetails::new)
-               .orElseThrow(()-> new UsernameNotFoundException("User not found: " + username));
+        User userEntity = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+
+        return new CustomUserDetails(userEntity);
     }
 }
