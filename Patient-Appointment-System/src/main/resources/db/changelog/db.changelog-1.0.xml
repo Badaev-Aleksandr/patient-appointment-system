@@ -4,15 +4,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-    <changeSet id="create-person-table" author="aleksandr badaev">
+    <changeSet id="create-person-table" author="igor zimmermann">
         <createTable tableName="person">
-            <column name="id" type="BIGINT" autoIncrement="true"/>
-            <column name="first_name" type="varchar(50)"/>
+            <column name="id" type="BIGINT" autoIncrement="true" />
+            <column name="first_name" type="VARCHAR(50)"/>
             <column name="last_name" type="varchar(50)"/>
             <column name="birth_date" type="date"/>
         </createTable>
         <rollback>
-            <dropTable tableName="person"/>
+            <dropTable tableName="person" />
         </rollback>
     </changeSet>
 

@@ -27,7 +27,7 @@ public class RegistrationUserDto {
     private String email;
 
     @NotBlank(message = "Phone number is required")
-    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number format")
+    @Pattern(regexp = "^[+]?[0-9]{5,30}$", message = "Invalid phone number format")
     private String phoneNumber;
 
     @NotNull(message = "Date of birth is required")
