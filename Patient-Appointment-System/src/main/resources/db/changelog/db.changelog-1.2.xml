@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-    <changeSet id="init-dev-data" author="igor zimmermann" context="dev">
+    <changeSet id="init-dev-data" author="aleksandr badaev" context="dev">
         <insert tableName="person">
             <column name="first_name" value="Dev"/>
             <column name="last_name" value="User" />

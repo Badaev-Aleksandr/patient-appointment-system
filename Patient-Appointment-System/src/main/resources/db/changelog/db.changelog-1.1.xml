@@ -5,7 +5,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
     <!-- добавляем в таблицу person новую колонку email -->
-    <changeSet id="add-person-email" author="igor zimmermann">
+    <changeSet id="add-person-email" author="aleksandr badaev">
         <addColumn tableName="person">
             <column name="email" type="VARCHAR(100)"/>
         </addColumn>
