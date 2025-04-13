@@ -3,16 +3,16 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
-    <changeSet id="rename-person-table" author="aleksandr badaev">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="people"/>
-            </not>
-        </preConditions>
-        <renameTable oldTableName="person" newTableName="people"/>
+
+    <changeSet id="add-books-genre" author="aleksandr badaev">
+
+        <addColumn tableName="books">
+            <column name="genre" type="varchar(50)"/>
+        </addColumn>
         <rollback>
-            <renameTable oldTableName="people" newTableName="person" />
+            <dropColumn tableName="books" columnName="genre"/>
         </rollback>
+
     </changeSet>
 
 </databaseChangeLog>
