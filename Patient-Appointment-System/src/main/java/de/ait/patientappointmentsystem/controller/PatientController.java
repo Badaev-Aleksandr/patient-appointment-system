@@ -2,7 +2,6 @@ package de.ait.patientappointmentsystem.controller;
 
 import de.ait.patientappointmentsystem.dto.PatientDto;
 import de.ait.patientappointmentsystem.dto.UpdatePatientDto;
-import de.ait.patientappointmentsystem.model.Patient;
 import de.ait.patientappointmentsystem.service.CustomUserDetails;
 import de.ait.patientappointmentsystem.service.PatientService;
 import jakarta.persistence.EntityNotFoundException;
